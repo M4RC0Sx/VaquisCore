@@ -18,6 +18,10 @@ repositories {
         name = "paper"
         url = uri("https://papermc.io/repo/repository/maven-public/")
     }
+    maven {
+        name = "aikar"
+        url = uri("https://repo.aikar.co/content/groups/aikar/")
+    }
 }
 
 dependencies {
@@ -25,15 +29,20 @@ dependencies {
     implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version = "1.6.4")
     implementation(group = "io.papermc.paper", name = "paper-api", version = "1.19.3-R0.1-SNAPSHOT")
     implementation(group = "net.dv8tion", name = "JDA", version = "5.0.0-beta.2")
+    implementation(group = "co.aikar", name = "acf-paper", version = "0.5.1-SNAPSHOT")
 }
 
 tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
+        options.compilerArgs.add("-parameters")
+        options.isFork = true
+        options.forkOptions.executable = "javac"
     }
 
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
+        kotlinOptions.javaParameters = true
     }
 
     val fatJar by named("shadowJar", com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class) {
@@ -53,6 +62,9 @@ tasks {
             include(dependency("com.fasterxml.jackson.core:jackson-core"))
             include(dependency("com.fasterxml.jackson.core:jackson-annotations"))
             include(dependency("org.slf4j:slf4j-api"))
+
+            // Aikar Commands
+            include(dependency("co.aikar:.*"))
         }
 
         // Kotlin
@@ -68,6 +80,9 @@ tasks {
         relocate("com.squareup.okio", "vaquiscore.shaded.com.squareup.okio")
         relocate("com.fasterxml.jackson", "vaquiscore.shaded.com.fasterxml.jackson")
         relocate("org.slf4j", "vaquiscore.shaded.org.slf4j")
+
+        // Aikar Commands
+        relocate("co.aikar", "vaquiscore.shaded.co.aikar")
 
         minimize()
     }
