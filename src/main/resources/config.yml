@@ -1,0 +1,14 @@
+# Config version
+config-version: 1
+
+# Debug mode
+debug: false
+
+# Discord settings
+discord:
+  token: "DISCORD_BOT_TOKEN"
+  guild-id: "DISCORD_GUILD_ID"
+  msg-prefix: "**VaquisCore >>**"
+  activity-type: "PLAYING"
+  activity-text: "VaquisCore bot by M4RC0Sx"
+  channel-info-id: "DISCORD_CHANNEL_ID"
