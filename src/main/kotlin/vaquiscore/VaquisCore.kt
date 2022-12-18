@@ -1,7 +1,9 @@
 package vaquiscore
 
+import co.aikar.commands.PaperCommandManager
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.plugin.java.JavaPlugin
+import vaquiscore.command.VaquisCommand
 import vaquiscore.config.VaquisConfigMain
 import vaquiscore.config.PrettyConfig
 import vaquiscore.discord.VaquisDiscord
@@ -18,6 +20,8 @@ class VaquisCore : JavaPlugin() {
 
     lateinit var vaquisConfig: VaquisConfigMain
     lateinit var vaquisDiscord: VaquisDiscord
+
+    private lateinit var commandManager: PaperCommandManager
 
     val playerJoinTimesMap = mutableMapOf<String, Long>()
 
@@ -39,7 +43,11 @@ class VaquisCore : JavaPlugin() {
         }
 
         // Load listeners
-        loadEvents()
+        registerEvents()
+
+        // Load commands
+        commandManager = PaperCommandManager(this)
+        registerCommands()
     }
 
     override fun onDisable() {
@@ -67,9 +75,12 @@ class VaquisCore : JavaPlugin() {
         vaquisDiscord.start()
     }
 
-    fun loadEvents() {
+    private fun registerEvents() {
         server.pluginManager.registerEvents(PlayerJoinListener(), this)
         server.pluginManager.registerEvents(PlayerQuitListener(), this)
     }
 
+    private fun registerCommands() {
+        commandManager.registerCommand(VaquisCommand())
+    }
 }
