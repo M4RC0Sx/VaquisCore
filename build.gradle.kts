@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "vaquiscore"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
