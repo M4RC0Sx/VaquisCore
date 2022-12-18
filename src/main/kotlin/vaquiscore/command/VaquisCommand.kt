@@ -31,4 +31,5 @@ class VaquisCommand : BaseCommand() {
         vaquisCore.reloadPlugin()
         currentCommandIssuer.sendMessage("&3&lVaquis&b&lCore &8&l> &aVaquisCore plugin reloaded!".color())
     }
+
 }
