@@ -107,3 +107,9 @@ tasks {
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
+
+tasks.register<GradleBuild>("cleanShadow") {
+    group = "shadow"
+    description = "Run clean before shadowJar."
+    tasks = listOf("clean", "shadowJar")
+}
