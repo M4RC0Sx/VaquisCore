@@ -1,0 +1,6 @@
+name: VaquisCore
+version: @VERSION@
+authors: [M4RC0Sx]
+api-version: 1.19
+
+main: vaquiscore.VaquisCore
