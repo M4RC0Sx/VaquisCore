@@ -9,7 +9,7 @@ import java.io.File
  * Based on TitleManager Config utils.
  */
 
-class PrettyConfig(file: File): YamlConfiguration() {
+class PrettyConfig(file: File) : YamlConfiguration() {
 
     companion object {
         private val KEY_PATTERN = """^([ ]*)([^'"]+)[:].*$""".toRegex()
@@ -19,12 +19,11 @@ class PrettyConfig(file: File): YamlConfiguration() {
     init {
         val resource = VaquisCore.INSTANCE.getResource(file.name)
 
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.parentFile.mkdirs()
             file.createNewFile()
 
-            if (resource != null)
-                file.writeText(resource.bufferedReader(Charsets.UTF_8).readText(), Charsets.UTF_8)
+            if (resource != null) file.writeText(resource.bufferedReader(Charsets.UTF_8).readText(), Charsets.UTF_8)
         }
 
         load(file)
@@ -71,7 +70,7 @@ class PrettyConfig(file: File): YamlConfiguration() {
         Files.createParentDirs(file)
 
         val resource = VaquisCore.INSTANCE.getResource(file.name)
-        if(resource == null) {
+        if (resource == null) {
             super.save(file)
         } else {
             val data = saveToStringWithComments(resource.reader().readText())

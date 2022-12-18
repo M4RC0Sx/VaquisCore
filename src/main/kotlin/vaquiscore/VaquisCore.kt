@@ -16,6 +16,7 @@ class VaquisCore : JavaPlugin() {
     companion object {
         lateinit var INSTANCE: VaquisCore
     }
+
     private var conf: PrettyConfig? = null
 
     lateinit var vaquisConfig: VaquisConfigMain
@@ -56,8 +57,7 @@ class VaquisCore : JavaPlugin() {
     }
 
     override fun getConfig(): FileConfiguration {
-        if (conf == null)
-            reloadConfig()
+        if (conf == null) reloadConfig()
 
         return conf!!
     }

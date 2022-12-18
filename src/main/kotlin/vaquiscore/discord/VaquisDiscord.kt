@@ -24,12 +24,16 @@ class VaquisDiscord {
         guildId = vaquisCore.vaquisConfig.discord.guildId
         msgPrefix = vaquisCore.vaquisConfig.discord.msgPrefix
         channelInfoId = vaquisCore.vaquisConfig.discord.channelInfoId
-        val builder: JDABuilder = JDABuilder.create(token,
-            GatewayIntent.GUILD_MEMBERS,
-            GatewayIntent.GUILD_MESSAGES,
-            GatewayIntent.GUILD_PRESENCES)
+        val builder: JDABuilder = JDABuilder.create(
+            token, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_PRESENCES
+        )
 
-        builder.setActivity(Activity.of(Activity.ActivityType.valueOf(vaquisCore.vaquisConfig.discord.activityType), vaquisCore.vaquisConfig.discord.activityText))
+        builder.setActivity(
+            Activity.of(
+                Activity.ActivityType.valueOf(vaquisCore.vaquisConfig.discord.activityType),
+                vaquisCore.vaquisConfig.discord.activityText
+            )
+        )
         jda = builder.build()
     }
 
