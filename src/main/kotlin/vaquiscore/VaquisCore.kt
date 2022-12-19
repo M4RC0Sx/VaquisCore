@@ -7,6 +7,7 @@ import vaquiscore.command.VaquisCommand
 import vaquiscore.config.VaquisConfigMain
 import vaquiscore.config.PrettyConfig
 import vaquiscore.discord.VaquisDiscord
+import vaquiscore.listener.PlayerAdvancementListener
 import vaquiscore.listener.PlayerJoinListener
 import vaquiscore.listener.PlayerQuitListener
 import java.io.File
@@ -78,6 +79,7 @@ class VaquisCore : JavaPlugin() {
     private fun registerEvents() {
         server.pluginManager.registerEvents(PlayerJoinListener(), this)
         server.pluginManager.registerEvents(PlayerQuitListener(), this)
+        server.pluginManager.registerEvents(PlayerAdvancementListener(), this)
     }
 
     private fun registerCommands() {
