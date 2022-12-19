@@ -3,6 +3,7 @@ package vaquiscore.discord
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
+import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.requests.GatewayIntent
 import vaquiscore.VaquisCore
 
@@ -17,7 +18,7 @@ class VaquisDiscord {
     private lateinit var guildId: String
     private lateinit var msgPrefix: String
     private lateinit var channelInfoId: String
-    private var jda: JDA? = null
+    var jda: JDA? = null
 
     fun start() {
         token = vaquisCore.vaquisConfig.discord.token
@@ -46,6 +47,12 @@ class VaquisDiscord {
         if (jda == null) return
 
         jda!!.getGuildById(guildId)?.getTextChannelById(channelInfoId)?.sendMessage("$msgPrefix $msg")?.queue()
+    }
+
+    fun sendInfoMessage(embed: MessageEmbed) {
+        if (jda == null) return
+
+        jda!!.getGuildById(guildId)?.getTextChannelById(channelInfoId)?.sendMessageEmbeds(embed)?.queue()
     }
 
 }
